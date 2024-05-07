@@ -1,7 +1,12 @@
 package net.lax1dude.eaglercraft.v1_8.plugin.eaglermotd.bungee;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.Inet6Address;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,7 +19,9 @@ import net.lax1dude.eaglercraft.v1_8.plugin.eaglermotd.EaglerMOTDConfiguration;
 import net.lax1dude.eaglercraft.v1_8.plugin.eaglermotd.EaglerMOTDConnectionUpdater;
 import net.lax1dude.eaglercraft.v1_8.plugin.eaglermotd.EaglerMOTDLoggerAdapter;
 import net.lax1dude.eaglercraft.v1_8.plugin.eaglermotd.bungee.command.CommandMOTDReloadBungee;
+import net.lax1dude.eaglercraft.v1_8.plugin.gateway_bungeecord.EaglerXBungee;
 import net.lax1dude.eaglercraft.v1_8.plugin.gateway_bungeecord.api.query.EaglerQueryHandler;
+import net.lax1dude.eaglercraft.v1_8.plugin.gateway_bungeecord.config.EaglerListenerConfig;
 import net.md_5.bungee.api.plugin.Plugin;
 
 /**
@@ -68,7 +75,12 @@ public class EaglerMOTDPluginBungee extends Plugin {
 		if(!dataFolder.isDirectory() && !dataFolder.mkdirs()) {
 			throw new RuntimeException("Could not create config folder!");
 		}
-		conf.reload(dataFolder, loggerAdapter);
+		
+		try {
+			conf.reload(dataFolder, loggerAdapter, getListenerNames());
+		}catch(IOException ex) {
+			throw new RuntimeException("Could not reload config!", ex);
+		}
 	}
 
 	public void installQueryHandlers() {
@@ -85,8 +97,34 @@ public class EaglerMOTDPluginBungee extends Plugin {
 		installedQueries.clear();
 	}
 
+	public Collection<String> getListenerNames() {
+		Collection<EaglerListenerConfig> figs = EaglerXBungee.getEagler().getConfig().getServerListeners();
+		Collection<String> ret = new ArrayList(figs.size());
+		for(EaglerListenerConfig el : figs) {
+			ret.add(getListenerName(el));
+		}
+		return ret;
+	}
+
+	public static String getListenerName(EaglerListenerConfig listenerConf) {
+		InetSocketAddress sockAddr = listenerConf.getAddress();
+		if(sockAddr == null) {
+			sockAddr = listenerConf.getAddressV6();
+			if(sockAddr == null) {
+				throw new RuntimeException("Listener doesn't have an address: " + listenerConf);
+			}
+		}
+		InetAddress addr = sockAddr.getAddress();
+		if(addr instanceof Inet6Address) {
+			return "[" + addr.getHostAddress() + "]:" + sockAddr.getPort();
+		}else {
+			return addr.getHostAddress() + ":" + sockAddr.getPort();
+		}
+	}
+
 	@Override
 	public void onEnable() {
+		getProxy().getPluginManager().registerListener(this, new EaglerMOTDListenerBungee(this));
 		getProxy().getPluginManager().registerCommand(this, new CommandMOTDReloadBungee(this));
 		installQueryHandlers();
 		if(tickTimer == null) {
@@ -117,6 +155,8 @@ public class EaglerMOTDPluginBungee extends Plugin {
 
 	@Override
 	public void onDisable() {
+		getProxy().getPluginManager().unregisterListeners(this);
+		getProxy().getPluginManager().unregisterCommands(this);
 		removeQueryHandlers();
 		if(tickTimer != null) {
 			tickTimer.cancel();

@@ -29,7 +29,7 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
  * POSSIBILITY OF SUCH DAMAGE.
  * 
  */
-public class EaglerMOTDConnectionBungee  implements EaglerMOTDConnectionAdapter {
+public class EaglerMOTDConnectionBungee implements EaglerMOTDConnectionAdapter {
 
 	private final MOTDConnection con;
 	private String listenerString = null;

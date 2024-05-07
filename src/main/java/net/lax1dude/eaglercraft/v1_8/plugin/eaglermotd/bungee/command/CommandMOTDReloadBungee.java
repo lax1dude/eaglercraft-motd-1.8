@@ -1,7 +1,12 @@
 package net.lax1dude.eaglercraft.v1_8.plugin.eaglermotd.bungee.command;
 
+import java.util.logging.Level;
+
+import net.lax1dude.eaglercraft.v1_8.plugin.eaglermotd.EaglerMOTDLoggerAdapter;
 import net.lax1dude.eaglercraft.v1_8.plugin.eaglermotd.bungee.EaglerMOTDPluginBungee;
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Command;
 
 /**
@@ -30,7 +35,32 @@ public class CommandMOTDReloadBungee extends Command {
 
 	@Override
 	public void execute(CommandSender arg0, String[] arg1) {
-		
+		try {
+			plugin.removeQueryHandlers();
+			plugin.conf.reload(plugin.getDataFolder(), new EaglerMOTDLoggerAdapter() {
+				@Override
+				public void info(String msg) {
+					CommandMOTDReloadBungee.this.plugin.getLogger().info(msg);
+					arg0.sendMessage(new TextComponent(ChatColor.GREEN + "[EaglerMOTD] " + msg));
+				}
+
+				@Override
+				public void warn(String msg) {
+					CommandMOTDReloadBungee.this.plugin.getLogger().warning(msg);
+					arg0.sendMessage(new TextComponent(ChatColor.YELLOW + "[EaglerMOTD] " + msg));
+				}
+
+				@Override
+				public void error(String msg) {
+					CommandMOTDReloadBungee.this.plugin.getLogger().severe(msg);
+					arg0.sendMessage(new TextComponent(ChatColor.RED + "[EaglerMOTD] " + msg));
+				}
+			}, plugin.getListenerNames());
+			plugin.installQueryHandlers();
+		}catch(Throwable ex) {
+			arg0.sendMessage(new TextComponent(ChatColor.RED + "[EaglerMOTD] Failed to reload! " + ex.toString()));
+			plugin.getLogger().log(Level.SEVERE, "Exception thrown while reloading config!", ex);
+		}
 	}
 
 }
