@@ -1,5 +1,7 @@
 name: EaglerMOTD
 main: net.lax1dude.eaglercraft.v1_8.plugin.eaglermotd.bungee.EaglerMOTDPluginBungee
 version: 1.0.0
-author: lax1dude
 description: Plugin to add an animated MOTDs to your EaglercraftXBungee server
+author: lax1dude
+depends:
+- EaglercraftXBungee

@@ -276,7 +276,7 @@ public class EaglerMOTDConfiguration {
 	}
 
 	private static int optInt(JsonElement el, int def) {
-		if(el != null && !el.isJsonPrimitive()) {
+		if(el != null && el.isJsonPrimitive()) {
 			JsonPrimitive prim = el.getAsJsonPrimitive();
 			return prim.isNumber() ? prim.getAsInt() : def;
 		}else {
@@ -285,7 +285,7 @@ public class EaglerMOTDConfiguration {
 	}
 
 	private static boolean optBoolean(JsonElement el, boolean def) {
-		if(el != null && !el.isJsonPrimitive()) {
+		if(el != null && el.isJsonPrimitive()) {
 			JsonPrimitive prim = el.getAsJsonPrimitive();
 			return prim.isBoolean() ? prim.getAsBoolean() : def;
 		}else {
@@ -294,7 +294,7 @@ public class EaglerMOTDConfiguration {
 	}
 
 	private static float optFloat(JsonElement el, float def) {
-		if(el != null && !el.isJsonPrimitive()) {
+		if(el != null && el.isJsonPrimitive()) {
 			JsonPrimitive prim = el.getAsJsonPrimitive();
 			return prim.isNumber() ? prim.getAsFloat() : def;
 		}else {
@@ -303,7 +303,7 @@ public class EaglerMOTDConfiguration {
 	}
 
 	private static String optString(JsonElement el, String def) {
-		if(el != null && !el.isJsonPrimitive()) {
+		if(el != null && el.isJsonPrimitive()) {
 			JsonPrimitive prim = el.getAsJsonPrimitive();
 			return prim.isString() ? prim.getAsString() : def;
 		}else {

@@ -8,6 +8,7 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Command;
+import net.md_5.bungee.command.ConsoleCommandSender;
 
 /**
  * Copyright (c) 2024 lax1dude. All Rights Reserved.
@@ -41,24 +42,32 @@ public class CommandMOTDReloadBungee extends Command {
 				@Override
 				public void info(String msg) {
 					CommandMOTDReloadBungee.this.plugin.getLogger().info(msg);
-					arg0.sendMessage(new TextComponent(ChatColor.GREEN + "[EaglerMOTD] " + msg));
+					if(!(arg0 instanceof ConsoleCommandSender)) {
+						arg0.sendMessage(new TextComponent(ChatColor.GREEN + "[EaglerMOTD] " + msg));
+					}
 				}
 
 				@Override
 				public void warn(String msg) {
 					CommandMOTDReloadBungee.this.plugin.getLogger().warning(msg);
-					arg0.sendMessage(new TextComponent(ChatColor.YELLOW + "[EaglerMOTD] " + msg));
+					if(!(arg0 instanceof ConsoleCommandSender)) {
+						arg0.sendMessage(new TextComponent(ChatColor.YELLOW + "[EaglerMOTD] " + msg));
+					}
 				}
 
 				@Override
 				public void error(String msg) {
 					CommandMOTDReloadBungee.this.plugin.getLogger().severe(msg);
-					arg0.sendMessage(new TextComponent(ChatColor.RED + "[EaglerMOTD] " + msg));
+					if(!(arg0 instanceof ConsoleCommandSender)) {
+						arg0.sendMessage(new TextComponent(ChatColor.RED + "[EaglerMOTD] " + msg));
+					}
 				}
 			}, plugin.getListenerNames());
 			plugin.installQueryHandlers();
 		}catch(Throwable ex) {
-			arg0.sendMessage(new TextComponent(ChatColor.RED + "[EaglerMOTD] Failed to reload! " + ex.toString()));
+			if(!(arg0 instanceof ConsoleCommandSender)) {
+				arg0.sendMessage(new TextComponent(ChatColor.RED + "[EaglerMOTD] Failed to reload! " + ex.toString()));
+			}
 			plugin.getLogger().log(Level.SEVERE, "Exception thrown while reloading config!", ex);
 		}
 	}

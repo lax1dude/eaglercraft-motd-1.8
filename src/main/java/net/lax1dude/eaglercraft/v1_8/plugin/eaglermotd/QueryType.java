@@ -92,7 +92,7 @@ public class QueryType {
 		}else if(dataTextFile != null) {
 			String txt = QueryCache.getStringFile(dataTextFile);
 			if(txt == null) {
-				query.errorResponse("Error: could not load text file '" + dataJSONFile + "' for query '" + type + "'");
+				query.errorResponse("Error: could not load text file '" + dataTextFile + "' for query '" + type + "'");
 				return;
 			}else {
 				query.stringResponse(type, txt);
