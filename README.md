@@ -1,8 +1,10 @@
-### THIS IS A BUNGEE PLUGIN! Install in 'bungee_command/plugins' not 'bukkit_command/plugins'
+# EaglerMOTD for EaglercraftXBungee 1.8
 
-# EaglerMOTD
+### This plugin can add animated MOTDs to your EaglercraftXBungee server
 
-### This plugin can add animated MOTDs to your Eaglercraft server
+### This is a port of the EaglerMOTD plugin for 1.5.2, it is fully compatible with old 1.5.2 config files.
+
+### WARNING: EaglercraftXBungee version 1.2.0 and EaglercraftX 1.8 u30 are required for this plugin to work properly!
 
 ![EaglerMOTD Sample](https://i.gyazo.com/4e0105720c866990c82b221fe82f7cc9.gif)
 
@@ -10,9 +12,9 @@
 
 ## How to Install
 
-**Download [EaglerMOTD.jar](https://raw.githubusercontent.com/LAX1DUDE/eaglercraft-motd/main/EaglerMOTD.jar) and place it in your EaglercraftBungee '/plugins' directory. Then, restart EaglercraftBungee**
+**Download [EaglerMOTD.jar](https://raw.githubusercontent.com/lax1dude/eaglercraft-motd-1.8/main/EaglerMOTD.jar) and place it in your BungeeCord '/plugins' directory. Then, restart BungeeCord**
 
-You will find a new 'EaglerMOTD' folder in the plugins folder you put the jar in, once you finish restarting your server. This contains the plugin's configuration files, you can edit any of them and then type `motd-reload` in the EaglercraftBungee console to reload all the variables.
+You will find a new 'EaglerMOTD' folder in the plugins folder you put the jar in, once you finish restarting your server. This contains the plugin's configuration files, you can edit any of them and then type `motd-reload` in the BungeeCord console to reload all the variables.
 
 ## Configuration Guide
 
@@ -155,7 +157,7 @@ You will find a new 'EaglerMOTD' folder in the plugins folder you put the jar in
 
 **This has nothing to do with MOTD, skip this part if you're just trying to add an animated MOTD**
 
-**This file allows you to configure custom** `Accept:` **handlers to EaglercraftBungee to provide more custom statistics to 3rd party server lists and crawlers**
+**This file allows you to configure custom** `Accept:` **handlers to EaglercraftXBungee to provide more custom statistics to 3rd party server lists and crawlers**
 
 ```json
 {
@@ -243,11 +245,11 @@ Optionally, you can define:
 
 ## Compiling and Contributing
 
-First, download the latest [EaglercraftBungee jar](https://github.com/LAX1DUDE/eaglercraft/blob/main/stable-download/java/bungee_command/bungee-dist.jar) in stable-download on [LAX1DUDE/eaglercraft](https://github.com/LAX1DUDE/eaglercraft/)
+First, download the latest BungeeCord and EaglercraftXBungee jar
 
 **Make a new java project in Eclipse/IDEA/etc and add 'src' folder in this repository as the source code folder**
 
-**Then, add your EaglercraftBungee jar ([bungee-dist.jar](https://github.com/LAX1DUDE/eaglercraft/blob/main/stable-download/java/bungee_command/bungee-dist.jar)) to the java project's Build Path and refresh**
+**Then, add your BungeeCord and EaglercraftXBungee jar to the java project's Build Path and refresh**
 
 Export the contents of 'src' folder of the project to a JAR file to compile the plugin
 
