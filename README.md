@@ -12,7 +12,7 @@
 
 ## How to Install
 
-**Download [EaglerMOTD.jar](https://raw.githubusercontent.com/lax1dude/eaglercraft-motd-1.8/main/EaglerMOTD.jar) and place it in your BungeeCord '/plugins' directory. Then, restart BungeeCord**
+**Download [EaglerMOTD.jar](https://github.com/lax1dude/eaglercraft-motd-1.8/raw/main/EaglerMOTD.jar) and place it in your BungeeCord '/plugins' directory. Then, restart BungeeCord**
 
 You will find a new 'EaglerMOTD' folder in the plugins folder you put the jar in, once you finish restarting your server. This contains the plugin's configuration files, you can edit any of them and then type `motd-reload` in the BungeeCord console to reload all the variables.
 
