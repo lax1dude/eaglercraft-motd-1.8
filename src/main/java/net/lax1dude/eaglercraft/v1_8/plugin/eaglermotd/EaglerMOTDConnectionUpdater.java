@@ -83,7 +83,6 @@ public class EaglerMOTDConnectionUpdater {
 	public boolean tick() {
 		ageTimer++;
 		if(this.motd.isClosed()) {
-			System.out.println("dead");
 			return false;
 		}
 		if(ageTimer > conf.close_socket_after) {

@@ -160,8 +160,7 @@ public class EaglerMOTDConnectionBungee implements EaglerMOTDConnectionAdapter {
 
 	@Override
 	public void setKeepAlive(boolean b) {
-		// workaround for pre-1.2.0 EaglerXBungee
-		((MOTDQueryHandler)con).setKeepAlive(b);
+		con.setKeepAlive(b);
 	}
 
 	@Override
