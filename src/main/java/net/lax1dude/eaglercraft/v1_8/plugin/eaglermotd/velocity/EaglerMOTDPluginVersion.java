@@ -20,7 +20,7 @@ public class EaglerMOTDPluginVersion {
 	public static final String ID = "eaglermotd";
 	public static final String NAME = "EaglerMOTD";
 	public static final String DESCRIPTION = "Plugin to add an animated MOTDs to your EaglercraftXVelocity server";
-	public static final String VERSION = "1.1.0";
+	public static final String VERSION = "1.0.0";
 	public static final String AUTHOR = "lax1dude";
 
 }

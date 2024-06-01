@@ -1,0 +1,1 @@
+{"id":"eaglermotd","name":"EaglerMOTD","version":"1.0.0","description":"Plugin to add an animated MOTDs to your EaglercraftXVelocity server","authors":["lax1dude"],"dependencies":[{"id":"eaglerxvelocity","optional":false}],"main":"net.lax1dude.eaglercraft.v1_8.plugin.eaglermotd.velocity.EaglerMOTDPluginVelocity"}
